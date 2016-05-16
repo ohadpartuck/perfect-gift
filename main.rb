@@ -1,7 +1,8 @@
 require 'bundler'
 Bundler.require
 
-@validation_token = 'kkkooo'
+$validation_token = 'kkkooo'
+
 class PerfectGift < Sinatra::Base
   get '/' do
     'Hello world!'
@@ -14,13 +15,11 @@ class PerfectGift < Sinatra::Base
   end
 
   get '/webhook/' do
-    if @request.params['hub.verify_token'] == @validation_token
+    if @request.params['hub.verify_token'] == $validation_token
       @request.params['hub.challenge']
     else
       'Error, wrong validation token'
     end
-
-
   end
   # app.get('/webhook/', function (req, res) {
   #    if (req.query['hub.verify_token'] === '<validation_token>') {
