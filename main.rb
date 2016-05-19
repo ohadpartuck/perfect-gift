@@ -21,12 +21,11 @@ class PerfectGift < Sinatra::Base
       'Error, wrong validation token'
     end
   end
-  # app.get('/webhook/', function (req, res) {
-  #    if (req.query['hub.verify_token'] === '<validation_token>') {
-  #        res.send(req.query['hub.challenge']);
-  #    }
-  #    res.send('Error, wrong validation token');
-  #    })
+
+  post '/webhook-perfect-gift/' do
+    @request.params
+  end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
