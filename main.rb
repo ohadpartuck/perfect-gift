@@ -44,6 +44,7 @@ class PerfectGift < Sinatra::Base
   end
 
   post '/webhook-perfect-gift/' do
+    puts "Hello, logs!"
     puts @request.params.inspect
     puts @request.params.class.inspect
     messaging_events = @request.params[0].messaging
