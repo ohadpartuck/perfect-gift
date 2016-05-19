@@ -14,7 +14,7 @@ class PerfectGift < Sinatra::Base
     "Hello #{params['name']}!"
   end
 
-  get '/webhook/' do
+  get '/webhook-perfect-gift/' do
     if @request.params['hub.verify_token'] == $validation_token
       @request.params['hub.challenge']
     else
