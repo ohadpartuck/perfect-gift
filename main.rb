@@ -36,6 +36,9 @@ class PerfectGift < Sinatra::Base
   end
 
   get '/webhook-perfect-gift/' do
+    puts "get webhook-perfect-gift!"
+    puts @request.params.inspect
+    puts "get webhook-perfect-gift! end"
     if @request.params['hub.verify_token'] == $validation_token
       @request.params['hub.challenge']
     else
@@ -48,6 +51,7 @@ class PerfectGift < Sinatra::Base
     puts params.inspect
     puts params.class.inspect
     puts "goodbye, logs!"
+
     messaging_events = @request.params[0].messaging
 
     for i in 0..(messaging_events.length -1)
