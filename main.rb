@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.require
 require 'net/http'
+require 'json'
 
 
 $validation_token = 'kkkooo'
@@ -25,6 +26,12 @@ def send_text_message(sender, text)
 end
 
 class PerfectGift < Sinatra::Base
+
+  before do
+    content_type :json
+  end
+
+
   get '/' do
     'Hello world!'
   end
@@ -46,11 +53,18 @@ class PerfectGift < Sinatra::Base
     end
   end
 
+  post '/abc/' do
+    params = JSON.parse(request.body.read)
+    "HELLO WORLD #{params.to_s}".to_json
+  end
   post '/webhook-perfect-gift/' do
+    content_type :json
     puts "Hello, logs!"
-    puts params.inspect
+    params = JSON.parse(request.body.read)
+    puts params
     puts params.class.inspect
     puts "goodbye, logs!"
+    return @request.params.to_json
 
     messaging_events = @request.params[0].messaging
 
