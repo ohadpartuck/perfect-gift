@@ -1,26 +1,31 @@
 require 'bundler'
 Bundler.require
-require 'net/http'
+# require 'net/http'
 require 'json'
 
 
 $validation_token = 'kkkooo'
+$page_access_token = 'EAAETipyTdlMBAAi84aBpTLPTyLfTMTj82mUKro0d6aamlEJMN81WrCq94ricC5daDGgVMJ0K2iL9eZC8sXAxcRP4vZCZCQJ8qolBQGEQ9kMdZCQZAJA9MSNHdTqZBt168QghHXdUiqOTFOnGiblHZBbQbMOie7optWK9I80gGhL2QZDZD'
 
 
 def send_text_message(sender, text)
   message_data = {
       text:text
   }
+  post_data = HTTParty.post("https://graph.facebook.com/v2.6/me/messages?access_token=#{$page_access_token}",
+                body: {
+                    recipient: {id:sender},
+                    message: message_data,
+                }).body
+  # post_data = Net::HTTP.post_form(
+  #     URI.parse('https://graph.facebook.com/v2.6/me/messages?access_token='+$page_access_token),
+  #     {
+  #         recipient: {id:sender},
+  #         message: message_data,
+  #     }
+  # )
 
-  post_data = Net::HTTP.post_form(
-      URI.parse('https://graph.facebook.com/v2.6/me/messages'),
-      {
-          recipient: {id:sender},
-          message: message_data,
-      }
-  )
-
-  puts post_data.body
+  puts post_data
 
 
 end
@@ -66,13 +71,13 @@ class PerfectGift < Sinatra::Base
     puts "goodbye, logs!111"
     return @request.params.to_json
 
-    messaging_events = @request.params[0].messaging
+    messaging_events = params['entry'][0]['messaging']
 
-    for i in 0..(messaging_events.length -1)
+    for i in 0..(messaging_events.length - 1)
         event = messaging_events[i]
-        sender = event.sender.id
-        if event.message && event.message.text
-          text = event.message.text
+        sender = event['sender']['id']
+        if event['message'] && event['message']['text']
+          text = event['message']['text']
           send_text_message(sender, "Text received, echo: "+ text)
           # // Handle a text message from this sender
         end
