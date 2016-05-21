@@ -58,18 +58,9 @@ class PerfectGift < Sinatra::Base
     end
   end
 
-  post '/abc/' do
-    params = JSON.parse(request.body.read)
-    "HELLO WORLD #{params.to_s}".to_json
-  end
   post '/webhook-perfect-gift/' do
     content_type :json
-    puts "Hello, logs!111"
     params = JSON.parse(request.body.read)
-    puts params
-    puts params.class.inspect
-    puts "goodbye, logs!111"
-    return @request.params.to_json
 
     messaging_events = params['entry'][0]['messaging']
 
