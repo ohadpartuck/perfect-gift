@@ -7,6 +7,7 @@ gem 'sinatra', '~> 1.4', :require => 'sinatra/base'
 
 gem 'localtunnel', '~>1.0'
 gem 'httparty' , '~> 0.13'
+gem 'facebook-messenger'
 group :development do
   # for routing request to your localhost
   # gem 'localtunnel'
