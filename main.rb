@@ -11,7 +11,7 @@ $page_access_token = 'EAAETipyTdlMBAAi84aBpTLPTyLfTMTj82mUKro0d6aamlEJMN81WrCq94
 
 Facebook::Messenger.configure do |config|
   config.access_token = $page_access_token
-  config.app_secret = '9f8930ef5e21ac521ddd3bbb0ce731fc'
+  # config.app_secret = '9f8930ef5e21ac521ddd3bbb0ce731fc'
   config.verify_token = $validation_token
 end
 
