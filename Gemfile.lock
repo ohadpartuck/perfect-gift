@@ -1,9 +1,15 @@
+GIT
+  remote: git://github.com/hyperoslo/facebook-messenger.git
+  revision: f51ce97d207ae7dc621bc5599061a559e7a76cc7
+  branch: master
+  specs:
+    facebook-messenger (0.4.2)
+      httparty (~> 0.13.7)
+      rack (>= 1.6.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    facebook-messenger (0.4.0)
-      httparty (~> 0.13.7)
-      rack (~> 1.6.4)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -23,7 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  facebook-messenger (= 0.4)
+  facebook-messenger!
   httparty (= 0.13.7)
   localtunnel (~> 1.0)
   sinatra (~> 1.4)
