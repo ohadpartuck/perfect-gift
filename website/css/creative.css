@@ -11,7 +11,8 @@ body {
 }
 
 body {
-    font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;
+    /*font-family: Merriweather,'Helvetica Neue',Arial,sans-serif;*/
+    font-family: sans-serif;
 }
 
 hr {
@@ -210,6 +211,7 @@ header .header-content .header-content-inner p {
     font-weight: 300;
     /*color: rgba(255,255,255,.7);*/
     color: black;
+    font-weight: 500;
 }
 
 @media(min-width:768px) {
