@@ -143,6 +143,11 @@ class Questioner
       options: [{ title: 'Play', payload: 'play', image: 'player.jpg' },
                 { title: 'Listen', payload: 'listen', image: 'listener.jpg' }]
     },
+    { name: 'q4', payloads: ['cute_stuff', 'baking'],
+      text: 'What would she prefer more',
+      options: [{ title: 'Cute Stuff', payload: 'cute_stuff', image: 'cute-stuff.jpg' },
+                { title: 'Baking', payload: 'baking', image: 'baking.jpg' }]
+    },
   ]
 
   def self.next_question(questions_already_answered = [])
