@@ -155,13 +155,17 @@ end
 class UserSession
   attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id
 
-  def initialize(human_id)
+  def initialize(human_id, context='bot')
     clear
     @human_id = human_id
   end
 
+  def bot_mode?
+    @context == 'bot'
+  end
+
   def send_question(question)
-    Bot.deliver(
+    payload = {
       recipient: {
         id: @human_id
       },
@@ -174,7 +178,8 @@ class UserSession
             buttons: question[:options].map { |option| { type: 'postback', title: option[:title], payload: option[:payload] } }
           }
         }
-      })
+      }
+    }
 
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
