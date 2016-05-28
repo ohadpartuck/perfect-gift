@@ -15,18 +15,17 @@ Facebook::Messenger.configure do |config|
   config.verify_token = $validation_token
 end
 
+
 class PerfectGift < Sinatra::Base
 
   before do
-    content_type :json
+    content_type 'text/html'
   end
-
+  set :views, settings.root + '/public'
 
   get '/' do
-    # File.read(File.join('website', 'index.html'))
-    erb 'website/index.html'
+    erb 'index.html'.to_sym
   end
-
 
   # start the server if ruby file executed directly
   run! if app_file == $0
