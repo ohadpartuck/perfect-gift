@@ -128,7 +128,10 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['homebody', 'butterfly'], text: 'How much does your girl like to go out?', options: [{ url: 'http://2.bp.blogspot.com/-BHA9e7eQKNs/UjhYoWz0PPI/AAAAAAAAAG4/s5MA26_SsrI/s1600/couch-potato-250x250.jpg', title: 'Homebody', payload: 'homebody' }, { url: 'https://pbs.twimg.com/profile_images/633782900077408256/F541mrSs.jpg', title: 'Social Butterfly', payload: 'butterfly' }] }
+    { name: 'q1', payloads: ['homebody', 'butterfly'],
+      text: 'How much does your girl like to go out?',
+      options: [{ title: 'Homebody', payload: 'homebody', image: 'http://2.bp.blogspot.com/-BHA9e7eQKNs/UjhYoWz0PPI/AAAAAAAAAG4/s5MA26_SsrI/s1600/couch-potato-250x250.jpg' }, { title: 'Social Butterfly', payload: 'butterfly', image: 'https://pbs.twimg.com/profile_images/633782900077408256/F541mrSs.jpg' }]
+    },
   ]
 
   def self.next_question(questions_already_answered = [])
@@ -186,7 +189,7 @@ class UserSession
             elements:
               question[:options].map do |option|
                 {
-                  image_url: option[:url],
+                  image_url: option[:image],
                   buttons: [{
                       type: "postback",
                       title: option[:title],
