@@ -158,6 +158,7 @@ class UserSession
   def initialize(human_id, context='bot')
     clear
     @human_id = human_id
+    @context = context
   end
 
   def bot_mode?
