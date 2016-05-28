@@ -13,7 +13,11 @@ TAGS = {
     'high_p' => {'description' => 'price range 100-300$'},
     'art' => {'description' => 'person like art'},
     'gadget' => {'description' => 'person like gadgets'},
+    'jewelry' => {'description' => 'person like jewelry'},
+    'practical' => {'description' => 'person like practical gifts'},
 }
+
+# TODO add tracking on products sells
 
 Facebook::Messenger.configure do |config|
   config.access_token = $page_access_token
@@ -94,27 +98,28 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { :tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/il-en/listing/246354546/awakening-artful-colouring-adult'}
+    { :tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult'},
+    { :tags => ['low_p', 'jewelry', 'art'], :description => 'A Beautiful Crystal Beaded Statement Collar Necklace', :link => 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement'},
+    { :tags => ['low_p', 'practical'], :description => 'Rust colored leather strap', :link => 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick'},
+    { :tags => ['low_p', 'practical'], :description => 'Friendship journal, winnie the pooh', :link => 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh'},
   ]
 
   def self.recommend(tags, number_of_recommendations = 1)
     # match tags passed in with tags for product. find best match and return Product
     # how to format the response back to the user still needs to be resolved.
-    tags = ['low_p', 'gadget']
+    # tags = ['low_p', 'gadget']
     matching_products = []
-    products_by_similar_tags = []
+    # products_by_similar_tags = []
     results = []
     ALL_PRODUCTS.each do |product|
       similar_tags = tags & product[:tags]
       matching_products.push({'product' => product, 'similar_count' => similar_tags.size})
-      # insert to array by count
-
-
     end
 
+    matching_products.sort! { |a,b| a['similar_count'] <=> b['similar_count']}
     # popping out the last number_of_recommendations
-    number_of_recommendations.each do |x|
-      results.append(products_by_similar_tags.pop)
+    for i in 1..number_of_recommendations
+      results.push(matching_products.pop)
     end
 
     results
