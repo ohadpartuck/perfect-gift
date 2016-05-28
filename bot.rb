@@ -128,9 +128,15 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['homebody', 'butterfly'],
+    { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
-      options: [{ title: 'Homebody', payload: 'homebody', image: 'http://2.bp.blogspot.com/-BHA9e7eQKNs/UjhYoWz0PPI/AAAAAAAAAG4/s5MA26_SsrI/s1600/couch-potato-250x250.jpg' }, { title: 'Social Butterfly', payload: 'butterfly', image: 'https://pbs.twimg.com/profile_images/633782900077408256/F541mrSs.jpg' }]
+      options: [{ title: 'Homebody', payload: 'homebody', image: 'homebody-fireplace.jpg' },
+                { title: 'Traveler', payload: 'traveler', image: 'frog-traveller.jpg' }]
+    },
+    { name: 'q2', payloads: ['read_book', 'gadget'],
+      text: 'How would she prefer',
+      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpeg' },
+                { title: 'Playing Gadgets', payload: 'gadget', image: 'gadget-phone.jpg' }]
     },
   ]
 
@@ -142,20 +148,15 @@ end
 
 
 class UserSession
-  attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id, :context
+  attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id
 
-  def initialize(human_id, context='bot')
+  def initialize(human_id)
     clear
     @human_id = human_id
-    @context = context
-  end
-
-  def bot_mode?
-    @context == 'bot'
   end
 
   def send_question(question)
-    payload = {
+    Bot.deliver(
       recipient: {
         id: @human_id
       },
@@ -168,8 +169,7 @@ class UserSession
             buttons: question[:options].map { |option| { type: 'postback', title: option[:title], payload: option[:payload] } }
           }
         }
-      }
-    }
+      })
 
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
@@ -206,16 +206,14 @@ class UserSession
   end
 
   def send_message(message)
-    payload = {
+    Bot.deliver(
       recipient: {
         id: @human_id
       },
       message: {
         text: message
       }
-    }
-
-    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
+    )
   end
 
   def clear
@@ -229,8 +227,7 @@ class UserSession
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
-      send_choices(next_question)
-#      send_question(next_question)
+      send_question(next_question)
     else
       recommend_product
     end
@@ -244,10 +241,17 @@ class UserSession
     # find question answered, mark as asked
     question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
     @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
+    p "tags: #{@tags.to_s} #{__LINE__}"
+
     # in case question is already answered, remove other values
     @tags = @tags - question_answered[:payloads]
+
+    p "tags: #{@tags.to_s} #{__LINE__}"
+
     # add tags, for now it is just the payload. this can get more complex.
     @tags << payload
+
+    p "tags: #{@tags.to_s} #{__LINE__}"
 
     converse
   end
