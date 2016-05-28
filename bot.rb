@@ -94,18 +94,30 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { :tags => [TAGS['low_p'], TAGS['art']], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/il-en/listing/246354546/awakening-artful-colouring-adult'}
+    { :tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/il-en/listing/246354546/awakening-artful-colouring-adult'}
   ]
 
-  def self.recommend(tags)
+  def self.recommend(tags, number_of_recommendations = 1)
     # match tags passed in with tags for product. find best match and return Product
     # how to format the response back to the user still needs to be resolved.
-    matching_tags = []
+    tags = ['low_p', 'gadget']
+    matching_products = []
+    products_by_similar_tags = []
+    results = []
     ALL_PRODUCTS.each do |product|
-      product_tags = product[:tags]
+      similar_tags = tags & product[:tags]
+      matching_products.push({'product' => product, 'similar_count' => similar_tags.size})
+      # insert to array by count
 
 
     end
+
+    # popping out the last number_of_recommendations
+    number_of_recommendations.each do |x|
+      results.append(products_by_similar_tags.pop)
+    end
+
+    results
   end
 end
 

@@ -2,9 +2,8 @@ require 'bundler'
 Bundler.require
 
 require 'facebook/messenger'
-require_relative 'main'
-require_relative 'bot'
-require_relative 'main'
+require File.dirname(__FILE__) + '/bot'
+require File.dirname(__FILE__) + '/main'
 
 map('/bot') { run Facebook::Messenger::Server }
 map('/') { run PerfectGift }
