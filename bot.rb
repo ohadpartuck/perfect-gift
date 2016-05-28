@@ -134,15 +134,20 @@ end
 
 
 class UserSession
-  attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id
+  attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id, :context
 
-  def initialize(human_id)
+  def initialize(human_id, context='bot')
     clear
     @human_id = human_id
+    @context = context
+  end
+
+  def bot_mode?
+    @context == 'bot'
   end
 
   def send_question(question)
-    Bot.deliver(
+    payload = {
       recipient: {
         id: @human_id
       },
@@ -156,18 +161,69 @@ class UserSession
           }
         }
       }
-    )
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
+  end
+
+  def send_choices(question)
+    payload = {
+      recipient: {
+        id: @human_id
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+              {
+                title: "First card",
+                subtitle: "Element #1 of an hscroll",
+                image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+                buttons: [
+                  {
+                    type: "web_url",
+                    url: "https://www.messenger.com/",
+                    title: "Web url"
+                  },
+                  {
+                    type: "postback",
+                    title: "Postback",
+                    payload: "Payload for first element in a generic bubble",
+                  }
+                ],
+              },
+              {
+                title: "Second card",
+                subtitle: "Element #2 of an hscroll",
+                image_url: "http://messengerdemo.parseapp.com/img/gearvr.png",
+                buttons: [{
+                  type: "postback",
+                  title: "Postback",
+                  payload: "Payload for second element in a generic bubble",
+                }],
+              }
+            ]
+          }
+        }
+      }
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
   def send_message(message)
-    Bot.deliver(
+    payload = {
       recipient: {
         id: @human_id
       },
       message: {
         text: message
       }
-    )
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
   def clear
@@ -181,7 +237,8 @@ class UserSession
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
-      send_question(next_question)
+      send_choices(next_question)
+#      send_question(next_question)
     else
       recommend_product
     end
@@ -195,17 +252,10 @@ class UserSession
     # find question answered, mark as asked
     question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
     @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
-    p "tags: #{@tags.to_s} #{__LINE__}"
-
     # in case question is already answered, remove other values
     @tags = @tags - question_answered[:payloads]
-
-    p "tags: #{@tags.to_s} #{__LINE__}"
-
     # add tags, for now it is just the payload. this can get more complex.
     @tags << payload
-
-    p "tags: #{@tags.to_s} #{__LINE__}"
 
     converse
   end
