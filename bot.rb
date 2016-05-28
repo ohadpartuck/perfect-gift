@@ -148,6 +148,13 @@ class Questioner
       options: [{ title: 'Cute Stuff', payload: 'cute_stuff', image: 'cute-stuff.jpg' },
                 { title: 'Baking', payload: 'baking', image: 'baking.jpg' }]
     },
+    { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
+      text: 'What\'s your budget',
+      options: [{ title: '0-50$', payload: 'low_p' },
+                { title: '50-100$', payload: 'medium_p'},
+                { title: '100-200$', payload: 'high_p' },
+      ]
+    },
   ]
 
   def self.next_question(questions_already_answered = [])
