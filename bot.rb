@@ -135,17 +135,17 @@ class Questioner
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more',
-      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpg' },
+      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpeg' },
                 { title: 'Playing Gadgets', payload: 'gadget', image: 'gadget-phone.jpg' }]
     },
     { name: 'q3', payloads: ['play', 'listen'],
       text: 'What would she prefer more',
-      options: [{ title: 'Play', payload: 'play', image: 'player.jpg' },
+      options: [{ title: 'Play', payload: 'play', image: 'player.jpeg' },
                 { title: 'Listen', payload: 'listen', image: 'listener.jpg' }]
     },
     { name: 'q4', payloads: ['cute_stuff', 'baking'],
       text: 'What would she prefer more',
-      options: [{ title: 'Cute Stuff', payload: 'cute_stuff', image: 'cute-stuff.jpg' },
+      options: [{ title: 'Cute Stuff', payload: 'cute_stuff', image: 'cute-stuff.png' },
                 { title: 'Baking', payload: 'baking', image: 'baking.jpg' }]
     },
     { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
