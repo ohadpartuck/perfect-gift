@@ -128,7 +128,7 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['homebody', 'butterfly'], text: 'How much does your girl like to go out?', options: [{ title: 'Homebody', payload: 'homebody' }, { title: 'Social Butterfly', payload: 'butterfly' }] }
+    { name: 'q1', payloads: ['homebody', 'butterfly'], text: 'How much does your girl like to go out?', options: [{ url: 'http://2.bp.blogspot.com/-BHA9e7eQKNs/UjhYoWz0PPI/AAAAAAAAAG4/s5MA26_SsrI/s1600/couch-potato-250x250.jpg', title: 'Homebody', payload: 'homebody' }, { url: 'https://pbs.twimg.com/profile_images/633782900077408256/F541mrSs.jpg', title: 'Social Butterfly', payload: 'butterfly' }] }
   ]
 
   def self.next_question(questions_already_answered = [])
@@ -172,6 +172,8 @@ class UserSession
   end
 
   def send_choices(question)
+    send_message(question[:text])
+
     payload = {
       recipient: {
         id: @human_id
@@ -181,35 +183,17 @@ class UserSession
           type: 'template',
           payload: {
             template_type: 'generic',
-            elements: [
-              {
-                title: "First card",
-                subtitle: "Element #1 of an hscroll",
-                image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-                buttons: [
-                  {
-                    type: "web_url",
-                    url: "https://www.messenger.com/",
-                    title: "Web url"
-                  },
-                  {
-                    type: "postback",
-                    title: "Postback",
-                    payload: "Payload for first element in a generic bubble",
-                  }
-                ],
-              },
-              {
-                title: "Second card",
-                subtitle: "Element #2 of an hscroll",
-                image_url: "http://messengerdemo.parseapp.com/img/gearvr.png",
-                buttons: [{
-                  type: "postback",
-                  title: "Postback",
-                  payload: "Payload for second element in a generic bubble",
-                }],
-              }
-            ]
+            elements:
+              question[:options].map do |option|
+                {
+                  image_url: option[:url],
+                  buttons: [{
+                      type: "postback",
+                      title: option[:title],
+                      payload: option[:payload],
+                  }],
+                }
+              end
           }
         }
       }
