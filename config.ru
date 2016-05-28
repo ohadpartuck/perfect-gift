@@ -4,4 +4,4 @@ Bundler.require
 require 'facebook/messenger'
 require_relative 'bot'
 
-map('/example') { run Facebook::Messenger::Server }
+map('/bot') { run Facebook::Messenger::Server }
