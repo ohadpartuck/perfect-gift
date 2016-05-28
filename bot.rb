@@ -164,6 +164,10 @@ class UserSession
     @context == 'bot'
   end
 
+  def image_path(image)
+    'https://perfect-gift.herokuapp.com/img/questions/' + image
+  end
+
   def send_question(question)
     payload = {
       recipient: {
@@ -200,7 +204,7 @@ class UserSession
               question[:options].map do |option|
                 {
                   title: question[:title],
-                  image_url: option[:image],
+                  image_url: image_path(option[:image]),
                   buttons: [{
                       type: "postback",
                       title: option[:title],
@@ -217,14 +221,16 @@ class UserSession
   end
 
   def send_message(message)
-    Bot.deliver(
+    payload = {
       recipient: {
         id: @human_id
       },
       message: {
         text: message
       }
-    )
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
   def clear
@@ -238,7 +244,7 @@ class UserSession
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
-      send_question(next_question)
+      send_choices(next_question)
     else
       recommend_product
     end
