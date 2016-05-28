@@ -128,7 +128,11 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['homebody', 'butterfly'], text: 'How much does your girl like to go out?', options: [{ title: 'Homebody', payload: 'homebody' }, { title: 'Social Butterfly', payload: 'butterfly' }] }
+    { name: 'q1', payloads: ['homebody', 'butterfly'],
+      text: 'How much does your girl like to go out?',
+      options: [{ title: 'Homebody', payload: 'homebody', image: '' }, { title: 'Social Butterfly', payload: 'butterfly' }]
+    },
+
   ]
 
   def self.next_question(questions_already_answered = [])
