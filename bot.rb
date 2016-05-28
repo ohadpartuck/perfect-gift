@@ -189,6 +189,7 @@ class UserSession
             elements:
               question[:options].map do |option|
                 {
+                  title: question[:title],
                   image_url: option[:image],
                   buttons: [{
                       type: "postback",
