@@ -134,9 +134,14 @@ class Questioner
                 { title: 'Traveler', payload: 'traveler', image: 'frog-traveller.jpg' }]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
-      text: 'How would she prefer',
+      text: 'What would she prefer more',
       options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpeg' },
                 { title: 'Playing Gadgets', payload: 'gadget', image: 'gadget-phone.jpg' }]
+    },
+    { name: 'q3', payloads: ['play', 'listen'],
+      text: 'What would she prefer more',
+      options: [{ title: 'Play', payload: 'play', image: 'reading-book.jpeg' },
+                { title: 'Listen', payload: 'listen', image: 'gadget-phone.jpg' }]
     },
   ]
 
