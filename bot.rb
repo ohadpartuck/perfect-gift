@@ -7,6 +7,14 @@ $validation_token = 'kkkooo'
 $page_access_token = 'EAAETipyTdlMBAAi84aBpTLPTyLfTMTj82mUKro0d6aamlEJMN81WrCq94ricC5daDGgVMJ0K2iL9eZC8sXAxcRP4vZCZCQJ8qolBQGEQ9kMdZCQZAJA9MSNHdTqZBt168QghHXdUiqOTFOnGiblHZBbQbMOie7optWK9I80gGhL2QZDZD'
 $sessions = {}
 
+TAGS = {
+    'low_p' => {'description' => 'price range 0-50$'},
+    'medium_p' => {'description' => 'price range 50-100$'},
+    'high_p' => {'description' => 'price range 100-300$'},
+    'art' => {'description' => 'person like art'},
+    'gadget' => {'description' => 'person like gadgets'},
+}
+
 Facebook::Messenger.configure do |config|
   config.access_token = $page_access_token
 #  config.app_secret = '9f8930ef5e21ac521ddd3bbb0ce731fc'
@@ -86,13 +94,18 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { :tags => [], :description => 'desc', :link => 'http://www.amazon.com/some_product'}
+    { :tags => [TAGS['low_p'], TAGS['art']], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/il-en/listing/246354546/awakening-artful-colouring-adult'}
   ]
 
   def self.recommend(tags)
     # match tags passed in with tags for product. find best match and return Product
     # how to format the response back to the user still needs to be resolved.
+    matching_tags = []
+    ALL_PRODUCTS.each do |product|
+      product_tags = product[:tags]
 
+
+    end
   end
 end
 
