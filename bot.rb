@@ -135,13 +135,13 @@ class Questioner
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more',
-      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpeg' },
+      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpg' },
                 { title: 'Playing Gadgets', payload: 'gadget', image: 'gadget-phone.jpg' }]
     },
     { name: 'q3', payloads: ['play', 'listen'],
       text: 'What would she prefer more',
-      options: [{ title: 'Play', payload: 'play', image: 'reading-book.jpeg' },
-                { title: 'Listen', payload: 'listen', image: 'gadget-phone.jpg' }]
+      options: [{ title: 'Play', payload: 'play', image: 'player.jpg' },
+                { title: 'Listen', payload: 'listen', image: 'listener.jpg' }]
     },
   ]
 
