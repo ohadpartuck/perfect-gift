@@ -131,7 +131,7 @@ class Questioner
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
       options: [{ title: 'Homebody', payload: 'homebody', image: 'homebody-fireplace.jpg' },
-                { title: 'Traveler', payload: 'traveler', image: 'frog-traveller.jpg' }]
+                { title: 'Traveler', payload: 'traveler', image: 'maine_coon_kitten.jpg' }]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more',
