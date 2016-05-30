@@ -242,13 +242,12 @@ class UserSession
       message: {
         attachment: {
           type: 'template',
-          payload: {
+          payload: [{
             title: 'something',
             image_url: image_path(question[:options][0][:image]),
             template_type: 'generic',
             elements: {
-              title: 'some question',
-              subtitle: 'something',
+              title: question[:text],
               image_url: image_path(question[:options][0][:image]),
               buttons: [
                 question[:options].map do |option|
@@ -260,7 +259,7 @@ class UserSession
                 end
               ],
             }
-          }
+          }]
         }
       }
     }
