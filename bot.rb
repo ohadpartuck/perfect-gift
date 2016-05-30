@@ -235,8 +235,6 @@ class UserSession
 
 
   def send_choices2(question)
-    send_message(question[:text])
-
     payload = {
       recipient: {
         id: @human_id
@@ -245,6 +243,8 @@ class UserSession
         attachment: {
           type: 'template',
           payload: {
+            title: 'something',
+            image_url: image_path(question[:options][0][:image]),
             template_type: 'generic',
             elements: {
               title: question[:text],
