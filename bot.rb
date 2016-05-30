@@ -247,7 +247,8 @@ class UserSession
             image_url: image_path(question[:options][0][:image]),
             template_type: 'generic',
             elements: {
-              title: question[:text],
+              title: 'some question',
+              subtitle: 'something',
               image_url: image_path(question[:options][0][:image]),
               buttons: [
                 question[:options].map do |option|
