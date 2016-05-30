@@ -243,8 +243,6 @@ class UserSession
         attachment: {
           type: 'template',
           payload: {
-            title: 'something',
-            image_url: image_path(question[:options][0][:image]),
             template_type: 'generic',
             elements: [{
               title: question[:text],
