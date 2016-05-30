@@ -131,7 +131,7 @@ class Questioner
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
       options: [{ title: 'Homebody', payload: 'homebody', image: 'homebody-fireplace.jpg' },
-                { title: 'Traveler', payload: 'traveler', image: 'maine_coon_kitten.jpg' }]
+                { title: 'Traveler', payload: 'traveler', image: 'frog-traveller.jpg' }]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more',
@@ -150,7 +150,7 @@ class Questioner
     },
     { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
       text: 'What\'s your budget',
-      options: [{ title: '0-50$', payload: 'low_p' },
+      options: [{ title: '0-50$', payload: 'low_p', image: 'maine_coon_kitten.jpg' },
                 { title: '50-100$', payload: 'medium_p'},
                 { title: '100-200$', payload: 'high_p' },
       ]
@@ -233,6 +233,40 @@ class UserSession
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
+
+  def send_choices2(question)
+    send_message(question[:text])
+
+    payload = {
+      recipient: {
+        id: @human_id
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: {
+              title: question[:text],
+              image_url: image_path(question[:options][0][:image]),
+              buttons: [
+                question[:options].map do |option|
+                  {
+                    type: "postback",
+                    title: option[:title],
+                    payload: option[:payload],
+                  }
+                end
+              ],
+            }
+          }
+        }
+      }
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
+  end
+
   def send_message(message)
     payload = {
       recipient: {
@@ -257,7 +291,7 @@ class UserSession
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
-      send_choices(next_question)
+      send_choices2(next_question)
     else
       recommend_product
     end
