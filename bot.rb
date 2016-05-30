@@ -175,7 +175,8 @@ end
 
 
 class UserSession
-  attr_accessor :questions_answered, :messages_received, :tags, :products_rejected, :human_id, :user_done_with_questions
+  attr_accessor :questions_answered, :messages_received, :tags, :first_contact
+  attr_accessor: :products_rejected, :human_id, :user_done_with_questions
 
   def initialize(human_id, context='bot')
     clear
@@ -189,6 +190,7 @@ class UserSession
     @tags = []
     @products_rejected = []
     @user_done_with_questions = false
+    @first_contact = true
   end
 
   def bot_mode?
@@ -346,6 +348,14 @@ class UserSession
     elsif message_text == 'done'
       @user_done_with_questions = true
     end
+
+    if @first_contact
+      @first_contact = false
+
+      send_message("Hey human! I am going to ask you some questions and then give you some ideas for gifts for your woman.")
+      send_message(" ")
+    end
+
 
     next_question = Questioner.next_question(@questions_answered)
 
