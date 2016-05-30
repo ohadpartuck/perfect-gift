@@ -38,8 +38,8 @@ Bot.on :message do |message|
   message.attachments # => [ { 'type' => 'image', 'payload' => { 'url' => 'https://www.example.com/1.jpg' } } ]
 
   $sessions[message.sender['id']] ||= UserSession.new(message.sender['id'])
-  $sessions[message.sender['id']].messages_received << message.text
-  $sessions[message.sender['id']].converse
+  $sessions[message.sender['id']].converse(message.text)
+#  $sessions[message.sender['id']].converse
 
   # text_reply = last_message.nil? ? 'Hello, human!' : last_message
   #
@@ -287,7 +287,13 @@ class UserSession
     @products_recommended = []
   end
 
-  def converse
+  def converse(message_text = nil)
+    @messages_received << message_text if message_text
+
+    if message_text == 'reset'
+      clear
+    end
+
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
@@ -299,6 +305,13 @@ class UserSession
 
   def recommend_product
     send_message("No recommendations yet.. tags: #{@tags.to_s}")
+  end
+
+  def response(message_text)
+    @messages_received << message_text
+    if message_text == 'reset'
+      clear
+    end
   end
 
   def callback(payload)
