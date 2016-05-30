@@ -267,7 +267,7 @@ class UserSession
             template_type: 'generic',
             elements: [{
               title: product[:description],
-              image_url: image_path(product[:image]),
+              image_url: product[:image],
               buttons: [
                   {
                     type: "web_url",
