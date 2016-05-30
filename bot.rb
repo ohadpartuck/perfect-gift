@@ -249,15 +249,13 @@ class UserSession
             elements: [{
               title: question[:text],
               image_url: image_path(question[:options][0][:image]),
-              buttons: [
-                question[:options].map do |option|
+              buttons: question[:options].map do |option|
                   {
                     type: "postback",
                     title: option[:title],
                     payload: option[:payload],
                   }
-                end
-              ],
+              end
             }]
           }
         }
