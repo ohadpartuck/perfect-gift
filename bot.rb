@@ -255,7 +255,13 @@ class UserSession
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
-  def send_product(product)
+  def send_product(product, first = true)
+    if first
+      send_message('Great! We are now ready to start recommending you products. Take a look at what we suggest and if you are not happy with it feel free to ask for another suggestion.')
+    else
+      send_message('OK, we have lots of other ideas. How about this one?')
+    end
+
     payload = {
       recipient: {
         id: @human_id
@@ -348,7 +354,7 @@ class UserSession
     else
       next_product = Producter.next_product(@products_rejected)
       if next_product
-        send_product(next_product)
+        send_product(next_product, @products_rejected.empty?)
       else
         no_product_left_to_recommend
       end
