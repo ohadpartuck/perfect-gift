@@ -176,7 +176,7 @@ end
 
 class UserSession
   attr_accessor :questions_answered, :messages_received, :tags, :first_contact
-  attr_accessor: :products_rejected, :human_id, :user_done_with_questions
+  attr_accessor :products_rejected, :human_id, :user_done_with_questions
 
   def initialize(human_id, context='bot')
     clear
