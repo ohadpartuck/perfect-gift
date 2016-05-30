@@ -98,11 +98,16 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { :tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult'},
-    { :tags => ['low_p', 'jewelry', 'art'], :description => 'A Beautiful Crystal Beaded Statement Collar Necklace', :link => 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement'},
-    { :tags => ['low_p', 'practical'], :description => 'Rust colored leather strap', :link => 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick'},
-    { :tags => ['low_p', 'practical'], :description => 'Friendship journal, winnie the pooh', :link => 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh'},
+    { :id => '1', :image =>'reading-book.jpeg' ,:tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult'},
+    { :id => '2', :image =>'player.jpeg', :tags => ['low_p', 'jewelry', 'art'], :description => 'A Beautiful Crystal Beaded Statement Collar Necklace', :link => 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement'},
+    { :id => '3', :image => 'cute-stuff.png', :tags => ['low_p', 'practical'], :description => 'Rust colored leather strap', :link => 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick'},
+    { :id => '4', :image => 'reading-book.jpeg', :tags => ['low_p', 'practical'], :description => 'Friendship journal, winnie the pooh', :link => 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh'},
   ]
+
+  def self.next_product(products_already_rejected = [])
+    available_products = ALL_PRODUCTS.select { |qq| !products_already_rejected.include?(qq[:id]) }
+    available_products.first
+  end
 
   def self.recommend(tags, number_of_recommendations = 1)
     # match tags passed in with tags for product. find best match and return Product
@@ -170,7 +175,7 @@ end
 
 
 class UserSession
-  attr_accessor :questions_answered, :messages_received, :tags, :products_recommended, :human_id
+  attr_accessor :questions_answered, :messages_received, :tags, :products_rejected, :human_id, :user_done_with_questions
 
   def initialize(human_id, context='bot')
     clear
@@ -178,8 +183,20 @@ class UserSession
     @context = context
   end
 
+  def clear
+    @questions_answered = []
+    @messages_received = []
+    @tags = []
+    @products_rejected = []
+    @user_done_with_questions = false
+  end
+
   def bot_mode?
     @context == 'bot'
+  end
+
+  def keep_asking?
+    !@user_done_with_questions
   end
 
   def image_path(image)
@@ -238,6 +255,40 @@ class UserSession
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
+  def send_product(product)
+    payload = {
+      recipient: {
+        id: @human_id
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [{
+              title: product[:description],
+              image_url: image_path(product[:image]),
+              buttons: [
+                  {
+                    type: "web_url",
+                    title: 'Get this one for her',
+                    url: product[:link],
+                  },
+                  {
+                    type: "postback",
+                    title: 'Get another suggestion',
+                    payload: "another_#{product[:id]}",
+                  }
+              ]
+            }]
+          }
+        }
+      }
+    }
+
+    bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
+  end
+
 
   def send_choices(question)
     payload = {
@@ -281,27 +332,31 @@ class UserSession
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
-  def clear
-    @questions_answered = []
-    @messages_received = []
-    @tags = []
-    @products_recommended = []
-  end
-
   def converse(message_text = nil)
     @messages_received << message_text if message_text
 
     if message_text == 'reset'
       clear
+    elsif message_text == 'done'
+      @user_done_with_questions = true
     end
 
     next_question = Questioner.next_question(@questions_answered)
 
-    if next_question
+    if next_question && keep_asking?
       send_choices(next_question)
     else
-      recommend_product
+      next_product = Producter.next_product(@products_rejected)
+      if next_product
+        send_product(next_product)
+      else
+        no_product_left_to_recommend
+      end
     end
+  end
+
+  def no_product_left_to_recommend
+    send_message("No recommendations left.. tags: #{@tags.to_s}")
   end
 
   def recommend_product
@@ -317,14 +372,20 @@ class UserSession
 
   def callback(payload)
     # find question answered, mark as asked
-    question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
+    if payload.start_with?('another')
+      payload =~ /.*_(\d*)/
+      product_id = $1
+      @products_rejected << product_id.to_s
+    else
+      question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
 
-    if question_answered
-      @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
-      # in case question is already answered, remove other values
-      @tags = @tags - question_answered[:payloads]
-      # add tags, for now it is just the payload. this can get more complex.
-      @tags << payload
+      if question_answered
+        @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
+        # in case question is already answered, remove other values
+        @tags = @tags - question_answered[:payloads]
+        # add tags, for now it is just the payload. this can get more complex.
+        @tags << payload
+      end
     end
 
     converse
