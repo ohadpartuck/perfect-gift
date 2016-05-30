@@ -130,27 +130,32 @@ class Questioner
   ALL_QUESTIONS = [
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
-      options: [{ title: 'Homebody', payload: 'homebody', image: 'homebody-fireplace.jpg' },
-                { title: 'Traveler', payload: 'traveler', image: 'frog-traveller.jpg' }]
+      image: 'homebody-traveler.jpg',
+      options: [{ title: 'Homebody', payload: 'homebody'},
+                { title: 'Traveler', payload: 'traveler'}]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
-      text: 'What would she prefer more',
-      options: [{ title: 'Reading A Book', payload: 'read_book', image: 'reading-book.jpeg' },
-                { title: 'Playing Gadgets', payload: 'gadget', image: 'gadget-phone.jpg' }]
+      text: 'What would she prefer more?',
+      image: 'reading-book.jpeg',
+      options: [{ title: 'Reading A Book', payload: 'read_book'},
+                { title: 'Playing Gadgets', payload: 'gadget'}]
     },
     { name: 'q3', payloads: ['play', 'listen'],
-      text: 'What would she prefer more',
-      options: [{ title: 'Play', payload: 'play', image: 'player.jpeg' },
-                { title: 'Listen', payload: 'listen', image: 'listener.jpg' }]
+      text: 'What would she prefer more?',
+      image: 'player.jpeg',
+      options: [{ title: 'Play', payload: 'play'},
+                { title: 'Listen', payload: 'listen'}]
     },
     { name: 'q4', payloads: ['cute_stuff', 'baking'],
-      text: 'What would she prefer more',
-      options: [{ title: 'Cute Stuff', payload: 'cute_stuff', image: 'cute-stuff.png' },
-                { title: 'Baking', payload: 'baking', image: 'baking.jpg' }]
+      text: 'What would she prefer more?',
+      image: 'cute-stuff.png',
+      options: [{ title: 'Cute Stuff', payload: 'cute_stuff'},
+                { title: 'Baking', payload: 'baking'}]
     },
     { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
-      text: 'What\'s your budget',
-      options: [{ title: '0-50$', payload: 'low_p', image: 'maine_coon_kitten.jpg' },
+      text: "What's your budget?",
+      image: 'maine_coon_kitten.jpg',
+      options: [{ title: '0-50$', payload: 'low_p'},
                 { title: '50-100$', payload: 'medium_p'},
                 { title: '100-200$', payload: 'high_p' },
       ]
@@ -201,7 +206,7 @@ class UserSession
     bot_mode? ? Bot.deliver(payload) : (p payload.to_s)
   end
 
-  def send_choices(question)
+  def send_choices_deprecated(question)
     send_message(question[:text])
 
     payload = {
@@ -234,7 +239,7 @@ class UserSession
   end
 
 
-  def send_choices2(question)
+  def send_choices(question)
     payload = {
       recipient: {
         id: @human_id
@@ -246,7 +251,7 @@ class UserSession
             template_type: 'generic',
             elements: [{
               title: question[:text],
-              image_url: image_path(question[:options][0][:image]),
+              image_url: image_path(question[:image]),
               buttons: question[:options].map do |option|
                   {
                     type: "postback",
@@ -293,7 +298,7 @@ class UserSession
     next_question = Questioner.next_question(@questions_answered)
 
     if next_question
-      send_choices2(next_question)
+      send_choices(next_question)
     else
       recommend_product
     end
@@ -313,18 +318,14 @@ class UserSession
   def callback(payload)
     # find question answered, mark as asked
     question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
-    @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
-    p "tags: #{@tags.to_s} #{__LINE__}"
 
-    # in case question is already answered, remove other values
-    @tags = @tags - question_answered[:payloads]
-
-    p "tags: #{@tags.to_s} #{__LINE__}"
-
-    # add tags, for now it is just the payload. this can get more complex.
-    @tags << payload
-
-    p "tags: #{@tags.to_s} #{__LINE__}"
+    if question_answered
+      @questions_answered << question_answered[:name] unless @questions_answered.include?(question_answered[:name])
+      # in case question is already answered, remove other values
+      @tags = @tags - question_answered[:payloads]
+      # add tags, for now it is just the payload. this can get more complex.
+      @tags << payload
+    end
 
     converse
   end
