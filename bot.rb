@@ -98,10 +98,10 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { :id => '1', :image =>'reading-book.jpeg' ,:tags => ['low_p', 'art'], :description => 'awakening artful colouring for adults', :link => 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult'},
-    { :id => '2', :image =>'player.jpeg', :tags => ['low_p', 'jewelry', 'art'], :description => 'A Beautiful Crystal Beaded Statement Collar Necklace', :link => 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement'},
-    { :id => '3', :image => 'cute-stuff.png', :tags => ['low_p', 'practical'], :description => 'Rust colored leather strap', :link => 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick'},
-    { :id => '4', :image => 'reading-book.jpeg', :tags => ['low_p', 'practical'], :description => 'Friendship journal, winnie the pooh', :link => 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh'},
+    { id: '1', tags: ['low_p', 'art'], description: 'awakening artful colouring for adults', link: 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
+    { id: '2', tags: ['low_p', 'jewelry', 'art'], description: 'A Beautiful Crystal Beaded Statement Collar Necklace', link: 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement', image: 'https://img0.etsystatic.com/068/0/10014761/il_570xN.787372174_889g.jpg'},
+    { id: '3', tags: ['low_p', 'practical'], description: 'Rust colored leather strap', link: 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
+    { id: '4', tags: ['low_p', 'practical'], description: 'Friendship journal, winnie the pooh', link: 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'  },
   ]
 
   def self.next_product(products_already_rejected = [])
