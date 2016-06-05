@@ -118,14 +118,19 @@ class Producter
     available_products.first
   end
 
-  def self.recommend(tags, number_of_recommendations = 1)
+  def self.filtered_products(products_already_rejected)
+    ALL_PRODUCTS.select { |qq| !products_already_rejected.include?(qq[:id]) }
+  end
+
+  def self.recommend(tags, rejected_products, number_of_recommendations = 1)
     # match tags passed in with tags for product. find best match and return Product
     # how to format the response back to the user still needs to be resolved.
     # tags = ['low_p', 'gadget']
     matching_products = []
     # products_by_similar_tags = []
     results = []
-    ALL_PRODUCTS.each do |product|
+    filtered_products = self.filtered_products(rejected_products)
+    filtered_products.each do |product|
       similar_tags = tags & product[:tags]
       matching_products.push({'product' => product, 'similar_count' => similar_tags.size})
     end
@@ -371,7 +376,8 @@ class UserSession
     if next_question && keep_asking?
       send_choices(next_question)
     else
-      next_product = Producter.next_product(@products_rejected)
+      # next_product = Producter.next_product(@products_rejected)
+      next_product = Producter.recommend(@tags, @products_rejected)
       if next_product
         send_product(next_product, @products_rejected.empty?)
       else
