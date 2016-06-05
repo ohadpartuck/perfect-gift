@@ -182,7 +182,7 @@ class Questioner
   ALL_QUESTIONS = [
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
-      image: 'homebody-traveler.jpg',
+      image: 'homebody_travler.jpg',
       options: [{ title: 'Homebody', payload: 'homebody'},
                 { title: 'Traveler', payload: 'traveler'}]
     },
