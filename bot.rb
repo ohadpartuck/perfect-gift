@@ -209,7 +209,7 @@ class UserSession
     @products_rejected = []
     @user_done_with_questions = false
     @first_contact = true
-    @last_contact = Time.now - (10 * 365 * 24 * 60 * 60)
+    @last_contact = Time.now
   end
 
   def bot_mode?
@@ -364,7 +364,6 @@ class UserSession
 
     if @last_contact + (30*60) < Time.now
       clear
-      @last_contact = Time.now
     end
 
     if message_text == 'reset'
