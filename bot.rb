@@ -14,7 +14,12 @@ TAGS = {
     'art' => {'description' => 'person like art'},
     'gadget' => {'description' => 'person like gadgets'},
     'jewelry' => {'description' => 'person like jewelry'},
-    'practical' => {'description' => 'person like practical gifts'},
+    'book' => {'description' => 'book related gifts'},
+    'photography' => {'description' => 'photography'},
+    'playing' => {'description' => 'playing instruments'},
+    'music' => {'description' => 'music fans'},
+    'homebody' => {'description' => 'like home'},
+    'travler' => {'description' => 'likes to travel'},
 }
 
 # TODO add tracking on products sells
@@ -107,7 +112,7 @@ class Producter
     { id: 1, tags: ['low_p', 'art'], description: 'awakening artful colouring for adults', link: 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
     { id: 2, tags: ['low_p', 'jewelry', 'art'], description: 'A Beautiful Crystal Beaded Statement Collar Necklace', link: 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement', image: 'https://img0.etsystatic.com/068/0/10014761/il_570xN.787372174_889g.jpg'},
     { id: 3, tags: ['low_p', 'practical'], description: 'Rust colored leather strap', link: 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
-    { id: 4, tags: ['low_p', 'practical'], description: 'Friendship journal, winnie the pooh', link: 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'  },
+    { id: 4, tags: ['low_p', 'practical'], description: 'Friendship journal, winnie the pooh', link: 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg' },
     { id: 4, :tags => ['low_p', 'art'], :description => 'Advanced Flower Mandalas Adult Coloring Book', :link => 'https://www.etsy.com/listing/239157920/advanced-flower-mandalas-adult-coloring', image: 'https://img1.etsystatic.com/062/1/10505241/il_570xN.796024547_pso1.jpg' },
     { id: 5,  :tags => ['low_p', 'art'], :description => 'Calligraphy Starter Kit', :link => 'https://www.etsy.com/listing/230194941/calligraphy-starter-kit-printable-wisdom', image: 'https://img0.etsystatic.com/125/1/6922855/il_570xN.887407408_h3zs.jpg' },
     { id: 6, :tags => ['low_p', 'book'], :description => 'Batman v Superman Bookends', :link => 'https://www.etsy.com/listing/274461578/batman-v-superman-bookends', image: 'https://img0.etsystatic.com/117/0/12767035/il_570xN.949635312_hbg1.jpg' },
@@ -116,6 +121,24 @@ class Producter
     { id: 9, :tags => ['low_p', 'book'], :description => 'Iron Pipe Book Ends', :link => 'https://www.etsy.com/listing/277433728/iron-pipe-book-ends-industrial-bookends', image: 'https://img0.etsystatic.com/128/0/6915934/il_570xN.962669174_awaa.jpg' },
     { id: 10, :tags => ['low_p', 'book'], :description => 'Midori Travelers Notebook Cover', :link => 'https://www.etsy.com/listing/287374975/midori-travelers-notebook-cover-leather', image: 'https://img1.etsystatic.com/110/0/10341513/il_570xN.993483619_8090.jpg' },
     { id: 11, :tags => ['low_p', 'baking'], :description => 'A Personalized Recipe Box', :link => 'https://www.etsy.com/listing/182177426/personalized-recipe-box-custom-recipe', image: 'https://img0.etsystatic.com/103/1/5240828/il_570xN.843845872_tgie.jpg' },
+    { id: 12, :tags => ['low_p', 'baking'], :description => 'Personalized Rolling Pin', :link => 'https://www.etsy.com/listing/258042448/personalized-rolling-pin-engraved', image: 'https://img1.etsystatic.com/133/0/9906982/il_570xN.876410145_btkp.jpg' },
+    { id: 13, :tags => ['low_p', 'baking'], :description => 'Personalized Kitchen Sign', :link => 'https://www.etsy.com/listing/172730828/personalized-kitchen-sign-wood-kitchen', image: 'https://img0.etsystatic.com/027/1/7453142/il_570xN.539345260_622i.jpg' },
+    { id: 14, :tags => ['low_p', 'baking'], :description => 'Cutting Board Engraved', :link => 'https://www.etsy.com/il-en/listing/262791218/cutting-board-engraved-custom-queen-of', image: 'https://img1.etsystatic.com/115/2/12296660/il_570xN.899157629_9ezn.jpg' },
+    { id: 15, :tags => ['low_p', 'baking'], :description => 'Personalized Kitchen Conversions ', :link => 'https://www.etsy.com/listing/236284877/personalized-kitchen-conversions-cutting', image:'https://img1.etsystatic.com/133/0/6190949/il_570xN.890279745_fnux.jpg' },
+    { id: 16, :tags => ['medium_p', 'baking'], :description => 'Organic Live Cutting Board', :link => 'https://www.etsy.com/listing/161365887/personalized-kitchen-gift-organic-live', image: 'https://img0.etsystatic.com/120/0/6791412/il_570xN.930150678_mcjd.jpg' },
+    { id: 17, :tags => ['medium_p', 'baking'], :description => 'Ambrosia Maple Cutting Board', :link => 'https://www.etsy.com/listing/204819831/ambrosia-maple-cutting-board-thick', image: 'https://img0.etsystatic.com/107/0/6791412/il_570xN.975663452_bzvt.jpg' },
+    { id: 18, :tags => ['low_p', 'gadget'], :description => 'Exotic Wooden USB flash drive ', :link => 'https://www.etsy.com/listing/244656494/exotic-wooden-wood-usb-flash-drive',image: 'https://img0.etsystatic.com/102/0/11343054/il_570xN.968283362_nt9y.jpg' },
+    { id: 19, :tags => ['low_p', 'gadget'], :description => 'Bottle USB Flash Drive', :link => 'https://www.etsy.com/listing/240874723/4gb-cork-bottle-usb-flash-drive', image: 'https://img1.etsystatic.com/070/1/9492848/il_570xN.803722035_geli.jpg' },
+    { id: 20, :tags => ['low_p', 'gadget'], :description => 'Earphone Holder', :link => 'https://www.etsy.com/listing/258549486/earbud-holder-earphone-holder-cord', image: 'https://img0.etsystatic.com/124/0/8358682/il_570xN.879534526_9el8.jpg' },
+    { id: 21, :tags => ['low_p', 'gadget'], :description => 'USB Flash Drive Pouch ', :link => 'https://www.etsy.com/listing/251204110/burlap-jute-usb-flash-drive-pouch-holder',  image: 'https://img0.etsystatic.com/101/0/10325867/il_570xN.847060074_hpaw.jpg' },
+    { id: 22, :tags => ['low_p', 'photography'], :description => 'leather camera Strap', :link => 'https://www.etsy.com/listing/252939871/dslr-camera-strapblack-orange-flower', image: 'https://img0.etsystatic.com/108/0/8933609/il_570xN.855988254_fk7s.jpg' },
+    { id: 23, :tags => ['low_p', 'photography'], :description => 'Custom Leather Camera Strap', :link => 'https://www.etsy.com/listing/256602039/custom-leather-camera-strap-skinny-thin', image: 'https://img1.etsystatic.com/114/1/8442051/il_570xN.870137627_hzao.jpg' },
+    { id: 24, :tags => ['low_p', 'photography'], :description => 'Camera Case Bag', :link => 'https://www.etsy.com/listing/130075909/custom-dslr-camera-case-bag-dark-grey', image: 'https://img1.etsystatic.com/052/0/7986952/il_570xN.697420847_hnup.jpg' },
+    { id: 25, :tags => ['low_p', 'photography'], :description => 'Camera Backpack Bag', :link => 'https://www.etsy.com/listing/112320681/camera-backpack-bag-canvas-backpack', image: 'https://img0.etsystatic.com/005/0/5172521/il_570xN.385498888_pu49.jpg' },
+    { id: 26, :tags => ['low_p', 'photography'], :description => 'Vintage Polaroid Leather Camera Case', :link => 'https://www.etsy.com/listing/286507167/vintage-polaroid-leather-camera-case', image: 'https://img1.etsystatic.com/121/0/11598662/il_570xN.989590521_57tq.jpg' },
+    { id: 27, :tags => ['high_p', 'photography'], :description => 'Handmade Leather Camera Protector', :link => 'https://www.etsy.com/listing/196095986/for-fuji-film-x100-leather-cameras-case', image: 'https://img1.etsystatic.com/038/0/9523881/il_570xN.626337187_zr9o.jpg' },
+    { id: 28, :tags => ['medium_p', 'photography'], :description => 'Vintage camera strap', :link => 'https://www.etsy.com/listing/277994728/rugged-timeless-camera-strap-vintage', image: 'https://img0.etsystatic.com/109/0/7060842/il_570xN.965149776_3zuf.jpg' },
+    { id: 29, :tags => ['low_p', 'music', 'playing'], :description => 'All About The Ukulele And How To Do It', :link => 'https://www.etsy.com/listing/173408549/all-about-the-ukulele-and-how-to-do-it', image: 'https://img1.etsystatic.com/048/0/8937045/il_570xN.674868391_tl7v.jpg' },
 
   ]
 
@@ -127,6 +150,7 @@ class Producter
   def self.filtered_products(products_already_rejected)
     p "@products_rejected #{products_already_rejected.inspect}, full list length #{ALL_PRODUCTS.size}"
     filtered_list  = ALL_PRODUCTS.select { |qq| !products_already_rejected.include?(qq[:id]) }
+    filtered_list = filtered_list.shuffle
     p "@filtered_list #{filtered_list.size}"
     filtered_list
   end
@@ -159,33 +183,34 @@ class Questioner
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
       image: 'homebody-traveler.jpg',
-      options: [{ title: 'Homebody', payload: 'homebody'},
-                { title: 'Traveler', payload: 'traveler'}]
+      options: [{ title: 'Homebody', payload: ['homebody']},
+                { title: 'Traveler', payload: ['traveler']}]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more?',
       image: 'reading-book.jpeg',
-      options: [{ title: 'Reading A Book', payload: 'read_book'},
-                { title: 'Playing Gadgets', payload: 'gadget'}]
+      options: [{ title: 'Reading A Book', payload: ['book']},
+                { title: 'Playing Gadgets', payload: ['gadget']}]
     },
     { name: 'q3', payloads: ['play', 'listen'],
       text: 'What would she prefer more?',
       image: 'player.jpeg',
-      options: [{ title: 'Play', payload: 'play'},
-                { title: 'Listen', payload: 'listen'}]
+      options: [{ title: 'Play', payload: ['play']},
+                { title: 'Listen', payload: ['listen']}]
     },
     { name: 'q4', payloads: ['cute_stuff', 'baking'],
       text: 'What would she prefer more?',
-      image: 'cute-stuff.png',
-      options: [{ title: 'Cute Stuff', payload: 'cute_stuff'},
-                { title: 'Baking', payload: 'baking'}]
+      # image: 'cute-stuff.png',
+      image: 'cute_stuff_and_baking.jpg',
+      options: [{ title: 'Cute Stuff', payload: ['cute_stuff']},
+                { title: 'Baking', payload: ['baking']}]
     },
     { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
       text: "What's your budget?",
       image: 'maine_coon_kitten.jpg',
-      options: [{ title: '0-50$', payload: 'low_p'},
-                { title: '50-100$', payload: 'medium_p'},
-                { title: '100-200$', payload: 'high_p' },
+      options: [{ title: '0-50$', payload: ['low_p']},
+                { title: '50-100$', payload: ['medium_p']},
+                { title: '100-200$', payload: ['high_p'] },
       ]
     },
   ]
@@ -310,7 +335,9 @@ class UserSession
 
   def send_product(product, first = true)
     if first
-      send_message('Great! We are now ready to start recommending you products. Take a look at what we suggest and if you are not happy with it feel free to ask for another suggestion.')
+      send_message('Great! We are now ready to start recommending you products.
+Take a look at what we suggest and if you are not happy with
+it feel free to ask for another suggestion.')
     else
       send_message('OK, we have lots of other ideas. How about this one?')
     end
@@ -407,8 +434,12 @@ class UserSession
     if @first_contact
       @first_contact = false
 
-      send_message("Hey human! I am going to ask you some questions and then give you some ideas for gifts for your woman.")
-      send_message(" ")
+      send_message("Hey!!
+I am going to ask you some questions
+and then give you some ideas for gifts
+for your partner.")
+
+      # send_message(" ")
     end
 
 
