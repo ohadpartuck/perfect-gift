@@ -411,7 +411,7 @@ class UserSession
     if payload.start_with?('another')
       payload =~ /.*_(\d*)/
       product_id = $1
-      @products_rejected << product_id
+      @products_rejected << product_id.to_i
     else
       question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
 
