@@ -183,34 +183,33 @@ class Questioner
     { name: 'q1', payloads: ['homebody', 'traveler'],
       text: 'How much does your girl like to go out?',
       image: 'homebody-traveler.jpg',
-      options: [{ title: 'Homebody', payload: ['homebody']},
-                { title: 'Traveler', payload: ['traveler']}]
+      options: [{ title: 'Homebody', payload: 'homebody'},
+                { title: 'Traveler', payload: 'traveler'}]
     },
     { name: 'q2', payloads: ['read_book', 'gadget'],
       text: 'What would she prefer more?',
       image: 'reading_gadget.jpg',
-      options: [{ title: 'Reading A Book', payload: ['book']},
-                { title: 'Playing Gadgets', payload: ['gadget']}]
+      options: [{ title: 'Reading A Book', payload: 'book'},
+                { title: 'Playing Gadgets', payload: 'gadget'}]
     },
     { name: 'q3', payloads: ['play', 'listen'],
       text: 'What would she prefer more?',
       image: 'play_listen.jpeg',
-      options: [{ title: 'Play', payload: ['playing']},
-                { title: 'Listen', payload: ['listen']}]
+      options: [{ title: 'Play', payload: 'playing'},
+                { title: 'Listen', payload: 'listen'}]
     },
     { name: 'q4', payloads: ['cute_stuff', 'baking'],
       text: 'What would she prefer more?',
-      # image: 'cute-stuff.png',
       image: 'cute_stuff_and_baking.jpg',
-      options: [{ title: 'Cute Stuff', payload: ['cute_stuff']},
-                { title: 'Baking', payload: ['baking']}]
+      options: [{ title: 'Cute Stuff', payload: 'cute_stuff'},
+                { title: 'Baking', payload: 'baking'}]
     },
     { name: 'q5', payloads: ['low_p', 'medium_p', 'high_p'],
       text: "What's your budget?",
       image: 'credit_card.jpeg',
-      options: [{ title: '0-50$', payload: ['low_p']},
-                { title: '50-100$', payload: ['medium_p']},
-                { title: '100-200$', payload: ['high_p'] },
+      options: [{ title: '0-50$', payload: 'low_p'},
+                { title: '50-100$', payload: 'medium_p'},
+                { title: '100-200$', payload: 'high_p' },
       ]
     },
   ]
