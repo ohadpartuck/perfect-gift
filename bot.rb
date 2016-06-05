@@ -186,13 +186,13 @@ class Questioner
       options: [{ title: 'Homebody', payload: 'homebody'},
                 { title: 'Traveler', payload: 'traveler'}]
     },
-    { name: 'q2', payloads: ['read_book', 'gadget'],
+    { name: 'q2', payloads: ['book', 'gadget'],
       text: 'What would she prefer more?',
       image: 'reading_gadget.jpg',
       options: [{ title: 'Reading A Book', payload: 'book'},
                 { title: 'Playing Gadgets', payload: 'gadget'}]
     },
-    { name: 'q3', payloads: ['play', 'listen'],
+    { name: 'q3', payloads: ['playing', 'listen'],
       text: 'What would she prefer more?',
       image: 'play_listen.jpeg',
       options: [{ title: 'Play', payload: 'playing'},
