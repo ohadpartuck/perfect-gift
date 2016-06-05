@@ -14,7 +14,7 @@ TAGS = {
     'art' => {'description' => 'person like art'},
     'gadget' => {'description' => 'person like gadgets'},
     'jewelry' => {'description' => 'person like jewelry'},
-    'practical' => {'description' => 'person like practical gifts'},
+    'book' => {'description' => 'book related gifts'},
 }
 
 # TODO add tracking on products sells
@@ -121,6 +121,7 @@ class Producter
   def self.filtered_products(products_already_rejected)
     p "@products_rejected #{products_already_rejected.inspect}, full list length #{ALL_PRODUCTS.size}"
     filtered_list  = ALL_PRODUCTS.select { |qq| !products_already_rejected.include?(qq[:id]) }
+    filtered_list = filtered_list.suffle
     p "@filtered_list #{filtered_list.size}"
     filtered_list
   end
