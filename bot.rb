@@ -386,8 +386,12 @@ class UserSession
     if @first_contact
       @first_contact = false
 
-      send_message("Hey human! I am going to ask you some questions and then give you some ideas for gifts for your woman.")
-      send_message(" ")
+      send_message("Hey!
+            I am going to ask you some questions
+            and then give you some ideas for gifts
+            for your partner.")
+
+      # send_message(" ")
     end
 
 
