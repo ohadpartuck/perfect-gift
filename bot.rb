@@ -141,7 +141,7 @@ class Producter
       results.push(matching_products.pop)
     end
 
-    results
+    results[0]
   end
 end
 
@@ -378,6 +378,7 @@ class UserSession
     else
       # next_product = Producter.next_product(@products_rejected)
       next_product = Producter.recommend(@tags, @products_rejected)
+      p "next product is #{next_product.inspect}"
       if next_product
         send_product(next_product, @products_rejected.empty?)
       else
