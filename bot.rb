@@ -119,7 +119,7 @@ class Producter
   end
 
   def self.filtered_products(products_already_rejected)
-    p "@products_rejected #{@products_rejected.inspect}, full list length #{ALL_PRODUCTS.size}"
+    p "@products_rejected #{products_already_rejected.inspect}, full list length #{ALL_PRODUCTS.size}"
     filtered_list  = ALL_PRODUCTS.select { |qq| !products_already_rejected.include?(qq[:id]) }
     p "@filtered_list #{filtered_list.size}"
     filtered_list
@@ -418,7 +418,7 @@ class UserSession
     if payload.start_with?('another')
       payload =~ /.*_(\d*)/
       product_id = $1
-      @products_rejected << product_id
+      @products_rejected << product_id.to_i
     else
       question_answered = Questioner::ALL_QUESTIONS.find { |qq| qq[:payloads].include?(payload) }
 
