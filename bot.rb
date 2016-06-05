@@ -189,7 +189,8 @@ class Questioner
     },
     { name: 'q4', payloads: ['cute_stuff', 'baking'],
       text: 'What would she prefer more?',
-      image: 'cute-stuff.png',
+      # image: 'cute-stuff.png',
+      image: 'cute_stuff_and_baking.jpg',
       options: [{ title: 'Cute Stuff', payload: 'cute_stuff'},
                 { title: 'Baking', payload: 'baking'}]
     },
