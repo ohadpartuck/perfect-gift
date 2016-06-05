@@ -120,6 +120,14 @@ class Producter
     { id: 19, :tags => ['low_p', 'gadget'], :description => 'Bottle USB Flash Drive', :link => 'https://www.etsy.com/listing/240874723/4gb-cork-bottle-usb-flash-drive', image: 'https://img1.etsystatic.com/070/1/9492848/il_570xN.803722035_geli.jpg' },
     { id: 20, :tags => ['low_p', 'gadget'], :description => 'Earphone Holder', :link => 'https://www.etsy.com/listing/258549486/earbud-holder-earphone-holder-cord', image: 'https://img0.etsystatic.com/124/0/8358682/il_570xN.879534526_9el8.jpg' },
     { id: 21, :tags => ['low_p', 'gadget'], :description => 'USB Flash Drive Pouch ', :link => 'https://www.etsy.com/listing/251204110/burlap-jute-usb-flash-drive-pouch-holder',  image: 'https://img0.etsystatic.com/101/0/10325867/il_570xN.847060074_hpaw.jpg' },
+    { id: 22, :tags => ['low_p', 'photography'], :description => 'leather camera Strap', :link => 'https://www.etsy.com/listing/252939871/dslr-camera-strapblack-orange-flower', image: 'https://img0.etsystatic.com/108/0/8933609/il_570xN.855988254_fk7s.jpg' },
+    { id: 23, :tags => ['low_p', 'photography'], :description => 'Custom Leather Camera Strap', :link => 'https://www.etsy.com/listing/256602039/custom-leather-camera-strap-skinny-thin', image: 'https://img1.etsystatic.com/114/1/8442051/il_570xN.870137627_hzao.jpg' },
+    { id: 24, :tags => ['low_p', 'photography'], :description => 'Camera Case Bag', :link => 'https://www.etsy.com/listing/130075909/custom-dslr-camera-case-bag-dark-grey', image: 'https://img1.etsystatic.com/052/0/7986952/il_570xN.697420847_hnup.jpg' },
+    { id: 25, :tags => ['low_p', 'photography'], :description => 'Camera Backpack Bag', :link => 'https://www.etsy.com/listing/112320681/camera-backpack-bag-canvas-backpack', image: 'https://img0.etsystatic.com/005/0/5172521/il_570xN.385498888_pu49.jpg' },
+    { id: 26, :tags => ['low_p', 'photography'], :description => 'Vintage Polaroid Leather Camera Case', :link => 'https://www.etsy.com/listing/286507167/vintage-polaroid-leather-camera-case', image: 'https://img1.etsystatic.com/121/0/11598662/il_570xN.989590521_57tq.jpg' },
+    { id: 27, :tags => ['high_p', 'photography'], :description => 'Handmade Leather Camera Protector', :link => 'https://www.etsy.com/listing/196095986/for-fuji-film-x100-leather-cameras-case', image: 'https://img1.etsystatic.com/038/0/9523881/il_570xN.626337187_zr9o.jpg' },
+    { id: 28, :tags => ['medium_p', 'photography'], :description => 'Vintage camera strap', :link => 'https://www.etsy.com/listing/277994728/rugged-timeless-camera-strap-vintage', image: 'https://img0.etsystatic.com/109/0/7060842/il_570xN.965149776_3zuf.jpg' },
+    { id: 29, :tags => ['low_p', 'music', 'playing'], :description => 'All About The Ukulele And How To Do It', :link => 'https://www.etsy.com/listing/173408549/all-about-the-ukulele-and-how-to-do-it', image: 'https://img1.etsystatic.com/048/0/8937045/il_570xN.674868391_tl7v.jpg' },
 
   ]
 
