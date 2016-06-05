@@ -1,6 +1,6 @@
 # bot.rb
 require 'facebook/messenger'
-
+require 'mongo'
 include Facebook::Messenger
 
 $validation_token = 'kkkooo'
@@ -21,7 +21,6 @@ TAGS = {
 
 Facebook::Messenger.configure do |config|
   config.access_token = $page_access_token
-#  config.app_secret = '9f8930ef5e21ac521ddd3bbb0ce731fc'
   config.verify_token = $validation_token
 end
 
@@ -29,36 +28,17 @@ Facebook::Messenger::Subscriptions.subscribe
 
 Bot.on :message do |message|
   p "GOT MESSAGE: #{message.to_s}"
+  session = UserSessionManager.get(message.sender['id'])
+  session.converse(message.text)
+  UserSessionManager.store(session)
 
-  message.id          # => 'mid.1457764197618:41d102a3e1ae206a38'
-  message.sender      # => { 'id' => '1008372609250235' }
-  message.seq         # => 73
-  message.sent_at     # => 2016-04-22 21:30:36 +0200
-  message.text        # => 'Hello, bot!'
-  message.attachments # => [ { 'type' => 'image', 'payload' => { 'url' => 'https://www.example.com/1.jpg' } } ]
-
-  $sessions[message.sender['id']] ||= UserSession.new(message.sender['id'])
-  $sessions[message.sender['id']].converse(message.text)
-#  $sessions[message.sender['id']].converse
-
-  # text_reply = last_message.nil? ? 'Hello, human!' : last_message
-  #
-  # send_message(message.sender['id'], text_reply)
-
-#  send_buttons(message.sender['id'], [{ title: 'Yes', payload: 'HARMLESS' }, { title: 'No', payload: 'EXTERMINATE' }])
+  # $sessions[message.sender['id']] ||= UserSession.new(message.sender['id'])
+  # $sessions[message.sender['id']].converse(message.text)
 end
 
 
 Bot.on :optin do |optin|
   Facebook::Messenger::Subscriptions.subscribe
-
-  p "GOT OPTIN"
-  optin.sender    # => { 'id' => '1008372609250235' }
-  optin.recipient # => { 'id' => '2015573629214912' }
-  optin.sent_at   # => 2016-04-22 21:30:36 +0200
-  optin.ref       # => 'CONTACT_SKYNET'
-
-  # question 1
 
   Bot.deliver(
     recipient: optin.sender,
@@ -70,31 +50,57 @@ end
 
 
 Bot.on :delivery do |delivery|
-  delivery.ids       # => 'mid.1457764197618:41d102a3e1ae206a38'
-  delivery.sender    # => { 'id' => '1008372609250235' }
-  delivery.recipient # => { 'id' => '2015573629214912' }
-  delivery.at        # => 2016-04-22 21:30:36 +0200
-  delivery.seq       # => 37
-
   puts "Human was online at #{delivery.at}"
 end
 
 Bot.on :postback do |postback|
-  postback.sender    # => { 'id' => '1008372609250235' }
-  postback.recipient # => { 'id' => '2015573629214912' }
-  postback.sent_at   # => 2016-04-22 21:30:36 +0200
-  postback.payload   # => 'EXTERMINATE'
-
-  # if postback.payload == 'EXTERMINATE'
-  #   send_message(postback.sender['id'], "Human #{postback.recipient} marked for extermination")
-  # elsif postback.payload == 'HARMLESS'
-  #   send_message(postback.sender['id'], "Human #{postback.recipient} is friend")
-  # end
-
-# get user session, process postback
-  user_session = $sessions[postback.sender['id']]  || UserSession.new(postback.sender['id'])
-  user_session.callback(postback.payload)
+  session = UserSessionManager.get(postback.sender['id'])
+  session.callback(postback.payload)
+  UserSessionManager.store(session)
 end
+
+class UserSessionManager
+  def self.get(human_id, context = 'bot')
+    data = Persister.get(human_id)
+    if data
+      session = UserSession.from_json(data)
+      session.context = context
+      session
+    else
+      UserSession.new(human_id, context)
+    end
+  end
+
+  def self.store(session)
+    Persister.store(session.human_id, session.to_json)
+  end
+end
+
+class Persister
+  MONGO_CONFIG = {
+    'host' => 'ds023593.mlab.com:23593',
+    'database' => 'heroku_djzvn5q4',
+    'user' => 'perfectgift',
+    'password' => 'perfectgift123'
+  }
+
+  def self.connection
+    $mongo ||= Mongo::Client.new([ MONGO_CONFIG['host'] ], :database => MONGO_CONFIG['database'], :user => MONGO_CONFIG['user'], :password => MONGO_CONFIG['password'], :connect => :direct )
+  end
+
+  def self.col
+    connection.database[:sessions]
+  end
+
+  def self.get(human_id)
+    col.find({ 'human_id' => human_id}).first
+  end
+
+  def self.store(human_id, session)
+    col.update_one({'human_id' => human_id }, session, { upsert: true })
+  end
+end
+
 
 class Producter
   ALL_PRODUCTS = [
@@ -190,11 +196,10 @@ class Questioner
   end
 end
 
-
 class UserSession
   attr_accessor :questions_answered, :messages_received, :tags, :first_contact
   attr_accessor :products_rejected, :human_id, :user_done_with_questions
-  attr_accessor :last_contact
+  attr_accessor :last_contact, :context
 
   def initialize(human_id, context='bot')
     clear
@@ -210,6 +215,33 @@ class UserSession
     @user_done_with_questions = false
     @first_contact = true
     @last_contact = Time.now
+  end
+
+  def to_json
+    {
+      'questions_answered' => @questions_answered, 
+      'messages_received' => @messages_received,
+      'tags' => @tags,
+      'first_contact' => @first_contact,
+      'products_rejected' => @products_rejected,
+      'human_id' => @human_id,
+      'user_done_with_questions' => @user_done_with_questions,
+      'last_contact' => @last_contact,
+      'context' => @context
+    }
+  end
+
+  def self.from_json(str)
+    data = str
+    foo = self.new(data['human_id'], data['context'])
+    foo.questions_answered = data['questions_answered']
+    foo.messages_received = data['messages_received']
+    foo.tags = data['tags']
+    foo.first_contact = data['first_contact']
+    foo.products_rejected = data['products_rejected']
+    foo.user_done_with_questions = data['user_done_with_questions']
+    foo.last_contact = data['last_contact']
+    foo
   end
 
   def bot_mode?

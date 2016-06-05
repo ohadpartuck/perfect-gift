@@ -11,11 +11,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     bond (0.5.1)
+    bson (4.1.1)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.3)
     localtunnel (1.0.3)
+    mongo (2.2.5)
+      bson (~> 4.0)
     multi_xml (0.5.5)
     rack (1.6.4)
     rack-protection (1.5.3)
@@ -48,5 +51,6 @@ DEPENDENCIES
   facebook-messenger!
   httparty (= 0.13.7)
   localtunnel (~> 1.0)
+  mongo
   sinatra (~> 1.4)
   tux (= 0.3.0)
