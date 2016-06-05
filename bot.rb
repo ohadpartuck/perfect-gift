@@ -289,7 +289,9 @@ class UserSession
 
   def send_product(product, first = true)
     if first
-      send_message('Great! We are now ready to start recommending you products. Take a look at what we suggest and if you are not happy with it feel free to ask for another suggestion.')
+      send_message('Great! We are now ready to start recommending you products.
+                    Take a look at what we suggest and if you are not happy with
+                    it feel free to ask for another suggestion.')
     else
       send_message('OK, we have lots of other ideas. How about this one?')
     end
@@ -386,7 +388,7 @@ class UserSession
     if @first_contact
       @first_contact = false
 
-      send_message("Hey!
+      send_message("Hey!!
             I am going to ask you some questions
             and then give you some ideas for gifts
             for your partner.")
