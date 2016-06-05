@@ -98,10 +98,19 @@ end
 
 class Producter
   ALL_PRODUCTS = [
-    { id: '1', tags: ['low_p', 'art'], description: 'awakening artful colouring for adults', link: 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
-    { id: '2', tags: ['low_p', 'jewelry', 'art'], description: 'A Beautiful Crystal Beaded Statement Collar Necklace', link: 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement', image: 'https://img0.etsystatic.com/068/0/10014761/il_570xN.787372174_889g.jpg'},
-    { id: '3', tags: ['low_p', 'practical'], description: 'Rust colored leather strap', link: 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
-    { id: '4', tags: ['low_p', 'practical'], description: 'Friendship journal, winnie the pooh', link: 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'  },
+    { id: 1, tags: ['low_p', 'art'], description: 'awakening artful colouring for adults', link: 'https://www.etsy.com/listing/246354546/awakening-artful-colouring-adult', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
+    { id: 2, tags: ['low_p', 'jewelry', 'art'], description: 'A Beautiful Crystal Beaded Statement Collar Necklace', link: 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement', image: 'https://img0.etsystatic.com/068/0/10014761/il_570xN.787372174_889g.jpg'},
+    { id: 3, tags: ['low_p', 'practical'], description: 'Rust colored leather strap', link: 'https://www.etsy.com/listing/172710108/oil-tanned-leather-guitar-strap-w-pick', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'},
+    { id: 4, tags: ['low_p', 'practical'], description: 'Friendship journal, winnie the pooh', link: 'https://www.etsy.com/listing/220072790/friendship-journal-winnie-the-pooh', image: 'https://img1.etsystatic.com/113/2/8635824/il_570xN.914519225_por2.jpg'  },
+    { id: 4, :tags => ['low_p', 'art'], :description => 'Advanced Flower Mandalas Adult Coloring Book', :link => 'https://www.etsy.com/listing/239157920/advanced-flower-mandalas-adult-coloring', image: 'https://img1.etsystatic.com/062/1/10505241/il_570xN.796024547_pso1.jpg' },
+    { id: 5,  :tags => ['low_p', 'art'], :description => 'Calligraphy Starter Kit', :link => 'https://www.etsy.com/listing/230194941/calligraphy-starter-kit-printable-wisdom', image: 'https://img0.etsystatic.com/125/1/6922855/il_570xN.887407408_h3zs.jpg' },
+    { id: 6, :tags => ['low_p', 'book'], :description => 'Batman v Superman Bookends', :link => 'https://www.etsy.com/listing/274461578/batman-v-superman-bookends', image: 'https://img0.etsystatic.com/117/0/12767035/il_570xN.949635312_hbg1.jpg' },
+    { id: 7, :tags => ['low_p', 'book'], :description => 'Wonder Woman bookend', :link => 'https://www.etsy.com/listing/273034668/wonder-woman-bookend-designed-bookends', image: 'https://img0.etsystatic.com/122/0/8914111/il_570xN.943233242_qm9i.jpg' },
+    { id: 8, :tags => ['low_p', 'book'], :description => 'Snow Capped Mountain Bookend', :link => 'https://www.etsy.com/listing/287018637/snow-capped-mountain-wooden-bookends', image: 'https://img0.etsystatic.com/137/0/9977556/il_570xN.945309672_hoe5.jpg' },
+    { id: 9, :tags => ['low_p', 'book'], :description => 'Iron Pipe Book Ends', :link => 'https://www.etsy.com/listing/277433728/iron-pipe-book-ends-industrial-bookends', image: 'https://img0.etsystatic.com/128/0/6915934/il_570xN.962669174_awaa.jpg' },
+    { id: 10, :tags => ['low_p', 'book'], :description => 'Midori Travelers Notebook Cover', :link => 'https://www.etsy.com/listing/287374975/midori-travelers-notebook-cover-leather', image: 'https://img1.etsystatic.com/110/0/10341513/il_570xN.993483619_8090.jpg' },
+    { id: 11, :tags => ['low_p', 'baking'], :description => 'A Personalized Recipe Box', :link => 'https://www.etsy.com/listing/182177426/personalized-recipe-box-custom-recipe', image: 'https://img0.etsystatic.com/103/1/5240828/il_570xN.843845872_tgie.jpg' },
+
   ]
 
   def self.next_product(products_already_rejected = [])
