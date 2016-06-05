@@ -191,6 +191,7 @@ end
 class UserSession
   attr_accessor :questions_answered, :messages_received, :tags, :first_contact
   attr_accessor :products_rejected, :human_id, :user_done_with_questions
+  attr_accessor :last_contact
 
   def initialize(human_id, context='bot')
     clear
@@ -205,6 +206,7 @@ class UserSession
     @products_rejected = []
     @user_done_with_questions = false
     @first_contact = true
+    @last_contact = Time.now - (10 * 365 * 24 * 60 * 60)
   end
 
   def bot_mode?
@@ -356,6 +358,11 @@ class UserSession
 
   def converse(message_text = nil)
     @messages_received << message_text if message_text
+
+    if @last_contact + (30*60) < Time.now
+      clear
+      @last_contact = Time.now
+    end
 
     if message_text == 'reset'
       clear
