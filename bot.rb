@@ -397,9 +397,9 @@ it feel free to ask for another suggestion.')
       @first_contact = false
 
       send_message("Hey!!
-            I am going to ask you some questions
-            and then give you some ideas for gifts
-            for your partner.")
+I am going to ask you some questions
+and then give you some ideas for gifts
+for your partner.")
 
       # send_message(" ")
     end
