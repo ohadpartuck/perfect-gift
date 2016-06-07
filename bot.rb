@@ -194,7 +194,7 @@ class Questioner
     },
     { name: 'q3', payloads: ['playing', 'listen'],
       text: 'What would she prefer more?',
-      image: 'play_listen.jpeg',
+      image: 'play_listen.jpg',
       options: [{ title: 'Play', payload: 'playing'},
                 { title: 'Listen', payload: 'listen'}]
     },
