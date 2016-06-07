@@ -180,11 +180,11 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['homebody', 'traveler'],
+    { name: 'q1', payloads: ['traveler', 'homebody'],
       text: 'How much does your girl like to go out?',
       image: 'homebody_travler.jpg',
-      options: [{ title: 'Homebody', payload: 'homebody'},
-                { title: 'Traveler', payload: 'traveler'}]
+      options: [{ title: 'Homebody', payload: 'traveler'},
+                { title: 'Traveler', payload: 'homebody'}]
     },
     { name: 'q2', payloads: ['book', 'gadget'],
       text: 'What would she prefer more?',
