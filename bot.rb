@@ -23,6 +23,11 @@ TAGS = {
     'jewelry' => {'description' => 'jewelry'},
 }
 
+PAYLOADS_TO_TAGS = {
+    'homebody' => {'tags' => ['book', 'homebody', 'jewelry']},
+    'traveler' => {'tags' => ['travler']},
+}
+
 # TODO add tracking on products sells
 
 Facebook::Messenger.configure do |config|
@@ -485,6 +490,13 @@ for your partner.")
     end
   end
 
+  def get_tag_from_payload(payload)
+    result = PAYLOADS_TO_TAGS.fetch(payload, payload)
+    return result['tags'] if result.is_a? Hash
+
+    result
+  end
+
   def callback(payload)
     # find question answered, mark as asked
     if payload.start_with?('another')
@@ -499,7 +511,8 @@ for your partner.")
         # in case question is already answered, remove other values
         @tags = @tags - question_answered[:payloads]
         # add tags, for now it is just the payload. this can get more complex.
-        @tags << payload
+        tags = get_tag_from_payload(payload)
+        @tags << tags
       end
     end
 
