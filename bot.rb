@@ -20,6 +20,7 @@ TAGS = {
     'music' => {'description' => 'music fans'},
     'homebody' => {'description' => 'like home'},
     'travler' => {'description' => 'likes to travel'},
+    'jewelry' => {'description' => 'jewelry'},
 }
 
 # TODO add tracking on products sells
@@ -139,6 +140,16 @@ class Producter
     { id: 27, :tags => ['high_p', 'photography'], :description => 'Handmade Leather Camera Protector', :link => 'https://www.etsy.com/listing/196095986/for-fuji-film-x100-leather-cameras-case', image: 'https://img1.etsystatic.com/038/0/9523881/il_570xN.626337187_zr9o.jpg' },
     { id: 28, :tags => ['medium_p', 'photography'], :description => 'Vintage camera strap', :link => 'https://www.etsy.com/listing/277994728/rugged-timeless-camera-strap-vintage', image: 'https://img0.etsystatic.com/109/0/7060842/il_570xN.965149776_3zuf.jpg' },
     { id: 29, :tags => ['low_p', 'music', 'playing'], :description => 'All About The Ukulele And How To Do It', :link => 'https://www.etsy.com/listing/173408549/all-about-the-ukulele-and-how-to-do-it', image: 'https://img1.etsystatic.com/048/0/8937045/il_570xN.674868391_tl7v.jpg' },
+    { id: 30, :tags => ['low_p', 'jewelry',' necklace'], :description => 'Blue Necklace Crystal Beaded', :link => 'https://www.etsy.com/listing/236970467/blue-necklace-crystal-beaded-statement', image: 'https://img0.etsystatic.com/068/0/10014761/il_570xN.787372174_889g.jpg' },
+    { id: 31, :tags => ['low_p', 'jewelry',' necklace'], :description => 'flamingo necklace bird', :link => 'https://www.etsy.com/listing/274950912/flamingo-necklace-bird-necklace', image: 'https://img1.etsystatic.com/117/0/6723404/il_570xN.998362193_2ku1.jpg' },
+    { id: 32, :tags => ['low_p', 'jewelry',' necklace'], :description => 'Personalized Necklace', :link => 'https://www.etsy.com/listing/285824167/personalized-necklace-gift-initial', image: 'https://img0.etsystatic.com/127/0/6384030/il_570xN.940097412_kuql.jpg'},
+    { id: 33, :tags => ['low_p', 'jewelry',' necklace'], :description => 'Gold tassel necklace', :link => 'https://www.etsy.com/listing/241731527/gold-tassel-necklace-long-gold-tassel', image: 'https://img1.etsystatic.com/070/0/5582023/il_570xN.807300995_jq82.jpg' },
+    { id: 34, :tags => ['low_p', 'jewelry','  necklace'], :description => 'Geometric Necklace', :link => 'https://www.etsy.com/listing/259016787/geometric-necklace-modern-jewelry-pink', image: 'https://img1.etsystatic.com/110/3/5415151/il_570xN.882022259_ucea.jpg' },
+    { id: 35, :tags => ['high_p', 'jewelry',' necklace'], :description => 'Geometric Pendant', :link => 'https://www.etsy.com/listing/248483405/geometric-pendant-delicate-gold-layered', image: 'https://img0.etsystatic.com/102/0/11155085/il_570xN.847265600_lbjl.jpg' },
+    { id: 36, :tags => ['low_p', 'jewelry',' ring'], :description => 'Super Thin 14k Rose Gold Ring', :link => 'https://www.etsy.com/listing/237240346/super-thin-14k-rose-gold-rings-14k-rose', image: 'https://img1.etsystatic.com/066/2/9400387/il_570xN.787741979_lx85.jpg'},
+    { id: 37, :tags => ['low_p', 'jewelry',' ring'], :description => 'Resin Ring', :link => 'https://www.etsy.com/listing/154110772/resin-ring-teal-blue-eco-resin-faceted', image: 'https://img0.etsystatic.com/040/1/7536295/il_570xN.601968750_16zf.jpg' },
+    { id: 38, :tags => ['medium_p', 'jewelry',' ring'], :description => 'sunflower ring', :link => 'https://www.etsy.com/listing/276515786/mothers-day-gift-women-fine-jewelry', image: 'https://img0.etsystatic.com/136/0/9858794/il_570xN.958655430_r80n.jpg'},
+    { id: 39, :tags => ['medium_p', 'jewelry',' ring'], :description => 'Raw Opal Ring', :link => 'https://www.etsy.com/il-en/listing/252537145/raw-opal-ring-opal-ring-opalbridesmaid', image: 'https://img1.etsystatic.com/110/0/7026794/il_570xN.870345699_7inf.jpg'},
 
   ]
 
@@ -180,11 +191,11 @@ end
 
 class Questioner
   ALL_QUESTIONS = [
-    { name: 'q1', payloads: ['traveler', 'homebody'],
+    { name: 'q1', payloads: ['traveler', ['homebody', 'jewelry']],
       text: 'How much does your girl like to go out?',
       image: 'homebody_travler.jpg',
       options: [{ title: 'Homebody', payload: 'traveler'},
-                { title: 'Traveler', payload: 'homebody'}]
+                { title: 'Traveler', payload: ['homebody', 'jewelry']}]
     },
     { name: 'q2', payloads: ['book', 'gadget'],
       text: 'What would she prefer more?',
